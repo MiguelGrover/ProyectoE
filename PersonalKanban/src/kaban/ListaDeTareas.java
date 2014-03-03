@@ -15,5 +15,11 @@ public class ListaDeTareas {
 	public boolean Agregar(Tarea tarea){
 		return true;
 	}
+	public Tarea[] getListaDeTareas() {
+		return listaDeTareas;
+	}
+	public void setListaDeTareas(Tarea[] listaDeTareas) {
+		this.listaDeTareas = listaDeTareas;
+	}
 
 }
