@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Tarea {
 	private String descripcion;
-	private int estado;
+	private Estado estado;
 	private String Categoria;
 	private String Prioridad;
 	private String Propietario;
@@ -15,17 +15,18 @@ public class Tarea {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public int getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-	public void setEstado(int estado) {
+	public void setEstado( Estado estado) {
 		this.estado = estado;
 	}
 	public String getCategoria() {
 		return Categoria;
 	}
 	public void setCategoria(String categoria) {
-		Categoria = categoria;
+		//Categoria = categoria;
+		this.Categoria = categoria.toUpperCase().trim();
 	}
 	public String getPrioridad() {
 		return Prioridad;

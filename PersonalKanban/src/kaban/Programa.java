@@ -8,8 +8,9 @@ public class Programa {
 		
 		tarea.setDescripcion("Completar el programa");
 		
-		ListaDeTareas lista = new ListaDeTareas();
-		if (lista.Agregar(tarea)){
+		//ListaDeTareas lista = new ListaDeTareas();
+		IDashboard lista = new ListaDeTareas();
+		if (lista.add(tarea)){
 			System.out.println("Agregada");
 		}
 	}

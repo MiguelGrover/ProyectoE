@@ -1,8 +1,8 @@
 package kaban;
 
-public class ListaDeTareas {
+public class ListaDeTareas implements IDashboard{
 	private Tarea[] listaDeTareas;
-	/*+listaDeTareas
+	/*
 	+Clasificar(Estado)
 	+Agregar(Tarea)
 	+Borrar(Tarea)
@@ -21,5 +21,13 @@ public class ListaDeTareas {
 	public void setListaDeTareas(Tarea[] listaDeTareas) {
 		this.listaDeTareas = listaDeTareas;
 	}
-
+	@Override
+	public boolean add(Tarea task) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	public boolean remove(Tarea task) {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
