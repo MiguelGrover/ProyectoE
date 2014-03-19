@@ -1,4 +1,4 @@
-package kaban;
+package mg.proyecto.evolutivo.kanban;
 
 import java.util.Date;
 

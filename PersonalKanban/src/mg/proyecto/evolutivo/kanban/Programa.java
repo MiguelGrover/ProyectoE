@@ -1,4 +1,4 @@
-package kaban;
+package mg.proyecto.evolutivo.kanban;
 
 public class Programa {
 
