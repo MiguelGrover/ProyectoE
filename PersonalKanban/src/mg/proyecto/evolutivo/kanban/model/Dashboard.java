@@ -15,7 +15,7 @@ public class Dashboard implements IDashboard {
 		return true;
 	}
 	public void ensureCapacity(int minCapacity) {
-		modCount++;
+		setModCount(getModCount() + 1);
 		int oldCapacity = tasks.length;
 		if(minCapacity > oldCapacity) {
 			int newCapacity = (oldCapacity * 3) / 2 + 1;
@@ -43,7 +43,7 @@ public class Dashboard implements IDashboard {
 	}
 	
 	private void fastRemove(int index) {
-		modCount++;
+		setModCount(getModCount() + 1);
 		int numMoved = size - index - 1;
 		if(numMoved >0)
 			System.arraycopy(tasks, index + 1, tasks, index, numMoved);
@@ -51,7 +51,7 @@ public class Dashboard implements IDashboard {
 	}
 	
 	public void clear() {
-		modCount++;
+		setModCount(getModCount() + 1);
 		
 		for(int i = 0; i < size; i++)
 			tasks[i] = null;
@@ -69,5 +69,11 @@ public class Dashboard implements IDashboard {
 	
 	public Dashboard() {
 		this(10);
+	}
+	public int getModCount() {
+		return modCount;
+	}
+	public void setModCount(int modCount) {
+		this.modCount = modCount;
 	}
 }

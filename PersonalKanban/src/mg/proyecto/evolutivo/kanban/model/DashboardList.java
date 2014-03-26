@@ -5,18 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class DashboardList extends DashboardAbstract implements List {
+public class DashboardList extends DashboardAbstract implements List<Task> {
 	
 	public DashboardList() {
 		super();
 		System.out.println("starting DashboardList() ctor...");
 	}
 	
-	public boolean add(Object e) {
+	public boolean add(Task e) {
 		return container.add(e);
 	}
 	
-	public void add(int index, Object element) {
+	public void add(int index, Task element) {
 		container.add(index, element);
 	}
 	
@@ -39,7 +39,7 @@ public class DashboardList extends DashboardAbstract implements List {
 		return container.contains(c);
 	}
 	
-	public Object get(int index) {
+	public Task get(int index) {
 		return container.get(index);
 	}
 	
@@ -71,7 +71,7 @@ public class DashboardList extends DashboardAbstract implements List {
 		return container.remove(o);
 	}
 	
-	public Object remove(int index) {
+	public Task remove(int index) {
 		return container.remove(index);
 	}
 	
@@ -83,7 +83,7 @@ public class DashboardList extends DashboardAbstract implements List {
 		return container.retainAll(c);
 	}
 	
-	public Object set(int index,Object element) {
+	public Task set(int index,Task element) {
 		return container.set(index, element);
 	}
 	
