@@ -18,8 +18,12 @@ public class Task {
 	}
 	
 	public Task(String title) {
-		this(title, State.BACKLOG);
+		this(title, State.BACKLOG,(short) 1);
 		System.out.println("starting Task(String) ctor...");
+	}
+	public Task(String title, short priority) {
+		this(title, State.BACKLOG, priority);
+		System.out.println("starting Task(String, Priority) ctor...");
 	}
 	
 	public Task(String title,State state) {
@@ -29,6 +33,16 @@ public class Task {
 		this.title = title;
 		createDate = new Date();
 		priority = 1;
+		this.state  = state;
+	}
+	
+	public Task(String title,State state, short priority){
+		super();
+		System.out.println("starting Task(String, State,Priority) ctor...");
+		
+		this.title = title;
+		createDate = new Date();
+		this.priority = priority;
 		this.state  = state;
 	}
 
