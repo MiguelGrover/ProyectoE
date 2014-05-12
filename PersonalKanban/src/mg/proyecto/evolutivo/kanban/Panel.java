@@ -4,15 +4,25 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JMenuBar;
+
 import java.awt.Button;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class Panel extends JPanel {
+import mg.proyecto.evolutivo.kanban.model.Task;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+@SuppressWarnings("serial")
+public class Panel extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -23,83 +33,119 @@ public class Panel extends JPanel {
 	 * Create the panel.
 	 */
 	public Panel() {
-		setLayout(null);
+		getContentPane().setLayout(null);
 		
 		JLabel lblTarea = new JLabel("Tarea");
 		lblTarea.setBounds(200, 12, 55, 16);
-		add(lblTarea);
+		getContentPane().add(lblTarea);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo:");
 		lblTtulo.setBounds(29, 74, 55, 16);
-		add(lblTtulo);
+		getContentPane().add(lblTtulo);
 		
 		textField = new JTextField();
 		textField.setBounds(112, 72, 445, 20);
-		add(textField);
+		getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Descripci\u00F3n:");
 		lblNewLabel.setBounds(29, 115, 71, 16);
-		add(lblNewLabel);
+		getContentPane().add(lblNewLabel);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(112, 113, 445, 136);
-		add(textField_1);
+		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setBounds(29, 263, 55, 16);
-		add(lblEstado);
+		getContentPane().add(lblEstado);
 		
 		JLabel lblCategora = new JLabel("Categor\u00EDa:");
 		lblCategora.setBounds(29, 291, 71, 16);
-		add(lblCategora);
+		getContentPane().add(lblCategora);
 		
 		JLabel lblPrioridad = new JLabel("Prioridad:");
 		lblPrioridad.setBounds(29, 319, 71, 16);
-		add(lblPrioridad);
+		getContentPane().add(lblPrioridad);
 		
 		JLabel lblPropietario = new JLabel("Propietario:");
 		lblPropietario.setBounds(29, 347, 71, 16);
-		add(lblPropietario);
+		getContentPane().add(lblPropietario);
 		
 		JLabel lblFecha = new JLabel("Fecha:");
 		lblFecha.setBounds(29, 375, 55, 16);
-		add(lblFecha);
+		getContentPane().add(lblFecha);
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(112, 289, 445, 20);
-		add(textField_2);
+		getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(112, 345, 445, 20);
-		add(textField_3);
+		getContentPane().add(textField_3);
 		
 		JButton btnNewButton = new JButton("Agregar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showConfirmDialog(null, "Desea agregar los datos?");
+				String titulo = textField.getText();
+				if("".equalsIgnoreCase(titulo.trim())){
+					JOptionPane.showMessageDialog(null, "Titulo vacio!!");
+				}
+				Task tarea = new Task(titulo);
+				tarea.setDescription(textField_1.getText());
+				Program.dashboard.add(tarea);
+				
+			}
+		});
 		btnNewButton.setBounds(112, 405, 143, 56);
-		add(btnNewButton);
+		getContentPane().add(btnNewButton);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();	
+			}
+		});
 		btnCancelar.setBounds(414, 405, 143, 56);
-		add(btnCancelar);
+		getContentPane().add(btnCancelar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"BACKLOG", "DO_TO", "IN_PROGRESS", "DONE"}));
 		comboBox.setToolTipText("");
 		comboBox.setBounds(112, 259, 445, 25);
-		add(comboBox);
+		getContentPane().add(comboBox);
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboBox_1.setBounds(112, 315, 445, 25);
-		add(comboBox_1);
+		getContentPane().add(comboBox_1);
 		
 		textField_4 = new JTextField();
 		textField_4.setBounds(112, 373, 445, 20);
-		add(textField_4);
+		getContentPane().add(textField_4);
 		textField_4.setColumns(10);
-
+		
+			
+		
+		
+		
+	}
+		private class CerrarVentana3 implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				dispose();
+			}
+		}
+	public static void main(String[] args){
+		JFrame labelFrame2=new Panel();
+		labelFrame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		labelFrame2.setSize(600,600);
+		labelFrame2.setVisible(true);
 	}
 }
+
+
+

@@ -3,6 +3,9 @@ package mg.proyecto.evolutivo.kanban.model;
 import java.util.Date;
 
 public class Task {
+	
+	private final Object addSave = new Object();
+	
 	private String title;
 	private String description;
 	private State state;
@@ -125,13 +128,22 @@ public class Task {
 		return false;
 	}
 	
+	public boolean remove() {
+		synchronized(this){
+			return true;
+		}
+	}
+	
 	public boolean save() {
+		//
+		
+		synchronized (addSave){
 		try{
 			Thread.sleep(1*1000);
 		} catch(InterruptedException e){
 			e.printStackTrace();
 		}
 		return true;
-		
+		}
 	}
 }
