@@ -16,10 +16,14 @@ import javax.swing.JToolBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import mg.proyecto.evolutivo.kanban.model.Category;
+import mg.proyecto.evolutivo.kanban.model.State;
 import mg.proyecto.evolutivo.kanban.model.Task;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Panel extends JFrame {
@@ -28,7 +32,20 @@ public class Panel extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox;
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox_1;
+	
+	private void clean() {
+		textField.setText("");
+		textField_1.setText("");
+		textField_2.setText("");
+		comboBox.setSelectedIndex(0);
+		comboBox_1.setSelectedIndex(0);
+		textField_3.setText("");
+		textField_4.setText("");
+	}
 	/**
 	 * Create the panel.
 	 */
@@ -87,6 +104,8 @@ public class Panel extends JFrame {
 		textField_3.setBounds(112, 345, 445, 20);
 		getContentPane().add(textField_3);
 		
+		
+		
 		JButton btnNewButton = new JButton("Agregar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,8 +116,34 @@ public class Panel extends JFrame {
 				}
 				Task tarea = new Task(titulo);
 				tarea.setDescription(textField_1.getText());
+				String descripcion = textField_1.getText();
+				if("".equalsIgnoreCase(descripcion.trim())){
+					JOptionPane.showMessageDialog(null, "Descripcion vacio!!");
+				}
+				String Cate = textField_2.getText();
+				if("".equalsIgnoreCase(Cate.trim())){
+					JOptionPane.showMessageDialog(null, "Categoria vacio!!");
+				}
+				Category c = new Category();
+				c.setDescription(textField_2.getText());
+				tarea.setCategory(c);
+				tarea.setState((State)comboBox.getSelectedItem());
+				tarea.setPriority((short)comboBox.getSelectedItem());
+				tarea.setOwner(textField_3.getText());
+				String Dueno = textField_3.getText();
+				if("".equalsIgnoreCase(Dueno.trim())){
+					JOptionPane.showMessageDialog(null, "Dueño vacio!!");
+				}
+				Date date = new Date();
+				tarea.setCreateDate(date);
+				Calendar cal = Calendar.getInstance();  
+				cal.setTime(date);  
+				int foo = Integer.parseInt(textField_4.getText());
+				cal.add(Calendar.DATE, foo); // add number of days
+				date = cal.getTime();
+				tarea.setDueDate(date);
 				Program.dashboard.add(tarea);
-				
+				clean();
 			}
 		});
 		btnNewButton.setBounds(112, 405, 143, 56);
@@ -128,7 +173,7 @@ public class Panel extends JFrame {
 		textField_4.setBounds(112, 373, 445, 20);
 		getContentPane().add(textField_4);
 		textField_4.setColumns(10);
-		
+		textField_4.setText("Rango de dias");
 			
 		
 		
