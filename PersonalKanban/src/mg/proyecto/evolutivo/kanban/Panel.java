@@ -132,7 +132,7 @@ public class Panel extends JFrame {
 				c.setDescription(textField_2.getText());
 				tarea.setCategory(c);
 				tarea.setState(comboBox.getItemAt(comboBox.getSelectedIndex()));
-				tarea.setPriority((short)comboBox.getSelectedItem());
+				tarea.setPriority(Short.parseShort(comboBox_1.getSelectedItem().toString()));
 				tarea.setOwner(textField_3.getText());
 				Date date = new Date();
 				tarea.setCreateDate(date);
@@ -158,12 +158,12 @@ public class Panel extends JFrame {
 		btnCancelar.setBounds(414, 405, 143, 56);
 		getContentPane().add(btnCancelar);
 		
-		JComboBox comboBox = new JComboBox<State>(State.values());
+		comboBox = new JComboBox<State>(State.values());
 		comboBox.setToolTipText("");
 		comboBox.setBounds(112, 259, 445, 25);
 		getContentPane().add(comboBox);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboBox_1.setBounds(112, 315, 445, 25);
 		getContentPane().add(comboBox_1);
