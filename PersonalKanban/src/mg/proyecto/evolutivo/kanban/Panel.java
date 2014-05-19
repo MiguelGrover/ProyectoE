@@ -1,18 +1,10 @@
 package mg.proyecto.evolutivo.kanban;
 
-import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JMenuBar;
-
-import java.awt.Button;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -33,18 +25,35 @@ public class Panel extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBox;
+	private JComboBox<State> comboBox;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBox_1;
-	
 	private void clean() {
 		textField.setText("");
 		textField_1.setText("");
 		textField_2.setText("");
-		comboBox.setSelectedIndex(0);
 		comboBox_1.setSelectedIndex(0);
 		textField_3.setText("");
 		textField_4.setText("");
+	}
+	private boolean verify() throws Exception{
+		if("".equalsIgnoreCase(textField.getText().trim())){
+			JOptionPane.showMessageDialog(null, "Titulo vacio!!");
+			return false;
+		}
+		if("".equalsIgnoreCase(textField_1.getText().trim())){
+			JOptionPane.showMessageDialog(null, "Descripcion vacio!!");
+			return false;
+		}
+		if("".equalsIgnoreCase(textField_2.getText().trim())){
+			JOptionPane.showMessageDialog(null, "Categoria vacio!!");
+			return false;
+		}
+		if("".equalsIgnoreCase(textField_3.getText().trim())){
+			JOptionPane.showMessageDialog(null, "Dueño vacio!!");
+			return false;
+		}
+		return true;
 	}
 	/**
 	 * Create the panel.
@@ -109,31 +118,22 @@ public class Panel extends JFrame {
 		JButton btnNewButton = new JButton("Agregar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					verify();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JOptionPane.showConfirmDialog(null, "Desea agregar los datos?");
 				String titulo = textField.getText();
-				if("".equalsIgnoreCase(titulo.trim())){
-					JOptionPane.showMessageDialog(null, "Titulo vacio!!");
-				}
 				Task tarea = new Task(titulo);
 				tarea.setDescription(textField_1.getText());
-				String descripcion = textField_1.getText();
-				if("".equalsIgnoreCase(descripcion.trim())){
-					JOptionPane.showMessageDialog(null, "Descripcion vacio!!");
-				}
-				String Cate = textField_2.getText();
-				if("".equalsIgnoreCase(Cate.trim())){
-					JOptionPane.showMessageDialog(null, "Categoria vacio!!");
-				}
 				Category c = new Category();
 				c.setDescription(textField_2.getText());
 				tarea.setCategory(c);
-				tarea.setState((State)comboBox.getSelectedItem());
+				tarea.setState(comboBox.getItemAt(comboBox.getSelectedIndex()));
 				tarea.setPriority((short)comboBox.getSelectedItem());
 				tarea.setOwner(textField_3.getText());
-				String Dueno = textField_3.getText();
-				if("".equalsIgnoreCase(Dueno.trim())){
-					JOptionPane.showMessageDialog(null, "Dueño vacio!!");
-				}
 				Date date = new Date();
 				tarea.setCreateDate(date);
 				Calendar cal = Calendar.getInstance();  
@@ -158,8 +158,7 @@ public class Panel extends JFrame {
 		btnCancelar.setBounds(414, 405, 143, 56);
 		getContentPane().add(btnCancelar);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"BACKLOG", "DO_TO", "IN_PROGRESS", "DONE"}));
+		JComboBox comboBox = new JComboBox<State>(State.values());
 		comboBox.setToolTipText("");
 		comboBox.setBounds(112, 259, 445, 25);
 		getContentPane().add(comboBox);
@@ -179,12 +178,7 @@ public class Panel extends JFrame {
 		
 		
 	}
-		private class CerrarVentana3 implements ActionListener{
-			public void actionPerformed(ActionEvent e){
-				dispose();
-			}
-		}
-	public static void main(String[] args){
+		public static void main(String[] args){
 		JFrame labelFrame2=new Panel();
 		labelFrame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		labelFrame2.setSize(600,600);
