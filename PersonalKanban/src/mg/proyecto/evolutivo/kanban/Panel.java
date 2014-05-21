@@ -7,7 +7,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.JTextComponent;
 
+import mg.proyecto.evolutivo.exceptios.EmptyComponentException;
 import mg.proyecto.evolutivo.kanban.model.Category;
 import mg.proyecto.evolutivo.kanban.model.State;
 import mg.proyecto.evolutivo.kanban.model.Task;
@@ -24,7 +26,6 @@ public class Panel extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	@SuppressWarnings("rawtypes")
 	private JComboBox<State> comboBox;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBox_1;
@@ -36,24 +37,17 @@ public class Panel extends JFrame {
 		textField_3.setText("");
 		textField_4.setText("");
 	}
-	private boolean verify() throws Exception{
-		if("".equalsIgnoreCase(textField.getText().trim())){
-			JOptionPane.showMessageDialog(null, "Titulo vacio!!");
-			return false;
+	private void isEmpty(String message, JTextComponent text)
+		throws EmptyComponentException{
+		if("".equals(text.getText().trim())){
+			throw new EmptyComponentException(message, text);
 		}
-		if("".equalsIgnoreCase(textField_1.getText().trim())){
-			JOptionPane.showMessageDialog(null, "Descripcion vacio!!");
-			return false;
-		}
-		if("".equalsIgnoreCase(textField_2.getText().trim())){
-			JOptionPane.showMessageDialog(null, "Categoria vacio!!");
-			return false;
-		}
-		if("".equalsIgnoreCase(textField_3.getText().trim())){
-			JOptionPane.showMessageDialog(null, "Dueño vacio!!");
-			return false;
-		}
-		return true;
+	}
+	private void verify() throws Exception{
+		isEmpty("Titulo vacio!!",textField);
+		isEmpty("Descripcion vacia!!",textField_1);
+		isEmpty("Categoria vacio!!",textField_2);
+		isEmpty("Dueño vacio!!",textField_3);
 	}
 	/**
 	 * Create the panel.
