@@ -43,7 +43,7 @@ public class Panel extends JFrame {
 			throw new EmptyComponentException(message, text);
 		}
 	}
-	private void verify() throws Exception{
+	private void verify() throws EmptyComponentException{
 		isEmpty("Titulo vacio!!",textField);
 		isEmpty("Descripcion vacia!!",textField_1);
 		isEmpty("Categoria vacio!!",textField_2);
@@ -114,11 +114,13 @@ public class Panel extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					verify();
-				} catch (Exception e1) {
+				} catch (EmptyComponentException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					return;
 				}
 				JOptionPane.showConfirmDialog(null, "Desea agregar los datos?");
+				
 				String titulo = textField.getText();
 				Task tarea = new Task(titulo);
 				tarea.setDescription(textField_1.getText());

@@ -1,6 +1,7 @@
 package mg.proyecto.evolutivo.exceptios;
 
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 public class EmptyComponentException extends Exception{
 	
@@ -12,6 +13,7 @@ public class EmptyComponentException extends Exception{
 	
 	public EmptyComponentException(String message, JComponent component){
 		super(message);
+		JOptionPane.showMessageDialog(null, message);
 	this.component = component;
 	}
 }
