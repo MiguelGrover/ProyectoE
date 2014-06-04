@@ -118,6 +118,17 @@ public class Task {
 	public String toString() {
 		return this.title;
 	}
+	public String toHtml() {
+		return "<table><tr><td>Title:</td><td>" + title + "</td></tr>"
+				+ "<tr><td>Description:</td><td>" + description + "</td></tr>"
+				+ "<tr><td>State:</td><td>" + state + "</td></tr>"
+				+ "<tr><td>Category:</td><td>" + category + "</td></tr>"
+				+ "<tr><td>Priority:</td><td>" + priority + "</td></tr>"
+				+ "<tr><td>Owner:</td><td>" + owner + "</td></tr>"
+				+ "<tr><td>Due Date:</td><td>" + dueDate + "</td></tr>"
+				+ "<tr><td>Create Date:</td><td>" + createDate
+				+ "</td></tr></table>";
+	}
 	
 	public boolean equals(Object obj) {
 		if (obj != null) {
